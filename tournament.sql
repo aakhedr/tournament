@@ -11,13 +11,13 @@ DROP DATABASE IF EXISTS tournament;
 CREATE DATABASE tournament;
 \c tournament;
 
-CREATE TABLE players (  id SERIAL   PRIMARY KEY,
-                        name        TEXT,
+CREATE TABLE players(   id      SERIAL PRIMARY KEY,
+                        name    TEXT
                         );
 
-CREATE TABLE matches (  id SERIAL   PRIMARY KEY,
-                        player1     INT REFERENCES players.id,
-                        player2     INT REFERENCES players.id,
-                        winner      INT REFERENCES players.id
+CREATE TABLE matches(   id      SERIAL PRIMARY KEY,
+                        player1 INT REFERENCES players(id),
+                        player2 INT REFERENCES players(id),
+                        winner  INT REFERENCES players(id)
                         );
 
