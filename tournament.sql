@@ -41,7 +41,14 @@ CREATE VIEW played AS
     ON players.id = matches.player1 or players.id = matches.player2
     GROUP BY players.id
 
+-- Show standings from both wins view and played view
 CREATE VIEW standings AS
     SELECT played.id, played.name, wins.wins, played.played
     FROM played LEFT JOIN wins on played.id = wins.id
     ORDER BY wins.wins DESC, played.name;
+
+-- swissPairings
+CREATE VIEW pairings AS
+    SELECT a.id AS id1, a.name AS name1, b.id AS id2, b.name AS name2
+    FROM standings AS a, standings AS b
+    WHERE a.wins = b.wins AND a.id < b.id
